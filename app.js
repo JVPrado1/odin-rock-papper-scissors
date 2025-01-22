@@ -14,6 +14,6 @@ function escolhaComputador(){
     }
 }
 
-console.log(escolhaComputador())
+
 
 
