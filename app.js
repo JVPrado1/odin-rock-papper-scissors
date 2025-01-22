@@ -9,7 +9,7 @@
         } else if (randomNumber === 3) {
             console.log(`Tesoura`);
             return `tesoura`;
-        }
+        } 
     }
 
     function jogadaUsuario() {
@@ -30,6 +30,8 @@
     function iniciarRodada() {
         const pcPlay = escolhaComputador();
         const userPlay = jogadaUsuario();
+        let pontuacaoUsuario = 0
+        let pontuacaoPc = 0
         
         let mensagem = `Você escolheu ${userPlay.charAt(0).toUpperCase() + userPlay.slice(1)} e o computador escolheu ${pcPlay.charAt(0).toUpperCase() + pcPlay.slice(1)}!`
 
@@ -43,11 +45,13 @@
             (pcPlay === `papel` && userPlay === `pedra`)
         ) {
             mensagem += `\n\nVitória do computador!`;
+            pontuacaoPc++;
         } else {
             mensagem += `\n\nVitória do jogador!`;
+            pontuacaoUsuario++;
         }        
-        console.log(mensagem);
-        alert(mensagem);
+        console.log(`${mensagem}\n\nA pontuação atual é:\n\nUsuário: ${pontuacaoUsuario}\nPC: ${pontuacaoPc}`);
+        alert(`${mensagem}\n\nA pontuação atual é:\n\nUsuário: ${pontuacaoUsuario}\nPC: ${pontuacaoPc}`);
     }
 
     iniciarRodada()
