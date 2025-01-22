@@ -24,4 +24,8 @@
         }
     }
 
-   
+    const pcPlay = escolhaComputador();
+    const userPlay = jogadaUsuario();
+
+    console.log(`Você escolheu ${userPlay.charAt(0).toUpperCase() + userPlay.slice(1)} e o computador escolheu ${pcPlay.charAt(0).toUpperCase() + pcPlay.slice(1)}!`)
+;
