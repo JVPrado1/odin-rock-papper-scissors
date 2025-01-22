@@ -59,11 +59,6 @@ body {
 }
 
 
-
-.card__titulo{
-
-}
-
 .card__image {
    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
     margin: 5px auto;
@@ -72,6 +67,16 @@ body {
     width: auto;
     
   
+}
+
+.card__image--back{
+    background-image: url(./assets/carta-costas.jpg);
+    background-size: 100% 100%;
+}
+
+.card__image--back .card__titulo,
+.card__image--back .card__image {
+    display: none;
 }
 
 .card:hover,
