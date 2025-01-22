@@ -13,7 +13,7 @@
     }
 
     function jogadaUsuario() {
-        let escolhaUsuario = prompt("Escolha: Pedra, Papel ou Tesoura!").toLowerCase();
+        let escolhaUsuario = prompt(`pedra papel ou tesoura`).toLowerCase();
 
         if (escolhaUsuario === `papel`) {
             return `papel`;
@@ -21,11 +21,30 @@
             return `pedra`;
         } else if (escolhaUsuario === `tesoura`) {
             return `tesoura`;
+        } else {
+            console.log(`Input inválido! Digite pedra, papel ou tesoura.`)
+            return jogadaUsuario();
         }
     }
 
-    const pcPlay = escolhaComputador();
-    const userPlay = jogadaUsuario();
+    function iniciarRodada() {
+        const pcPlay = escolhaComputador();
+        const userPlay = jogadaUsuario();
+        
+        console.log(`Você escolheu ${userPlay.charAt(0).toUpperCase() + userPlay.slice(1)} e o computador escolheu ${pcPlay.charAt(0).toUpperCase() + pcPlay.slice(1)}!`);
+        
+        if (pcPlay === userPlay) {
+            console.log(`Empate!`);
+        } else if (
+            (pcPlay === `pedra` && userPlay === `tesoura`) ||
+            (pcPlay === `tesoura` && userPlay === `papel`) ||
+            (pcPlay === `papel` && userPlay === `pedra`)
+        ) {
+            console.log(`Vitória do computador!`);
+        } else {
+            console.log(`Vitória do jogador!`);
+        }
+    }
 
-    console.log(`Você escolheu ${userPlay.charAt(0).toUpperCase() + userPlay.slice(1)} e o computador escolheu ${pcPlay.charAt(0).toUpperCase() + pcPlay.slice(1)}!`)
-;
+    iniciarRodada()
+    
