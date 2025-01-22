@@ -13,7 +13,7 @@
     }
 
     function jogadaUsuario() {
-        let escolhaUsuario = prompt(`pedra papel ou tesoura`).toLowerCase();
+        let escolhaUsuario = prompt(`Faça sua escolha: PEDRA, PAPEL ou TESOURA`).toLowerCase();
 
         if (escolhaUsuario === `papel`) {
             return `papel`;
@@ -22,7 +22,7 @@
         } else if (escolhaUsuario === `tesoura`) {
             return `tesoura`;
         } else {
-            console.log(`Input inválido! Digite pedra, papel ou tesoura.`)
+            console.log(`Ops! Escolha apenas PEDRA, PAPEL ou TESOURA para jogar!`)
             return jogadaUsuario();
         }
     }
