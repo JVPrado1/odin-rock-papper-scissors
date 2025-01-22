@@ -31,19 +31,23 @@
         const pcPlay = escolhaComputador();
         const userPlay = jogadaUsuario();
         
+        let mensagem = `Você escolheu ${userPlay.charAt(0).toUpperCase() + userPlay.slice(1)} e o computador escolheu ${pcPlay.charAt(0).toUpperCase() + pcPlay.slice(1)}!`
+
         console.log(`Você escolheu ${userPlay.charAt(0).toUpperCase() + userPlay.slice(1)} e o computador escolheu ${pcPlay.charAt(0).toUpperCase() + pcPlay.slice(1)}!`);
         
         if (pcPlay === userPlay) {
-            console.log(`Empate!`);
+            mensagem += `\n\nEmpate!`;
         } else if (
             (pcPlay === `pedra` && userPlay === `tesoura`) ||
             (pcPlay === `tesoura` && userPlay === `papel`) ||
             (pcPlay === `papel` && userPlay === `pedra`)
         ) {
-            console.log(`Vitória do computador!`);
+            mensagem += `\n\nVitória do computador!`;
         } else {
-            console.log(`Vitória do jogador!`);
-        }
+            mensagem += `\n\nVitória do jogador!`;
+        }        
+        console.log(mensagem);
+        alert(mensagem);
     }
 
     iniciarRodada()
