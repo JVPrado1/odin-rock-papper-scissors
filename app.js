@@ -1,20 +1,29 @@
+const clickSound = new Audio('assets/click-botao.mp3');
+clickSound.volume = 0.3;
+
+
 let escolhaPc = realizarJogadaPc();
 console.log(escolhaPc);
 let escolhaJogador = '';
 let pontuacaoJogador = 0;
 let pontuacaoComputador = 0;
+const pontuacaoMaxima = 5;
+
+
 
 function realizarJogadaPc() {
     const choices = ['pedra', 'papel', 'tesoura'];
     const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];   
+    
+    return choices[randomIndex];  
+ 
 }
 
 function revelarCartas() {
     const cartasViradas = document.querySelectorAll('.card__titulo');
     cartasViradas.forEach(carta => {
         if (carta.textContent.toLowerCase() === escolhaPc) {
-            carta.parentElement.classList.remove('card__image--back');
+            carta.parentElement.classList.remove('card__image--back');  
         }
     });
 }
@@ -28,6 +37,22 @@ function esconderCartas() {
     });
 }
 
+function verificarFimDeJogo() {
+    if (pontuacaoJogador >= pontuacaoMaxima || pontuacaoComputador >= pontuacaoMaxima) {
+        const texto = document.querySelector('.teste2');
+        if (pontuacaoJogador >= pontuacaoMaxima) {
+            texto.innerHTML = 'Fim de jogo! Você venceu a partida!';
+            texto.style.color = 'green';
+        } else {
+            texto.innerHTML = 'Fim de jogo! Computador venceu a partida!';
+            texto.style.color = 'red';
+        }
+        revelarCartas();
+        return true;
+    }
+    return false;
+}
+
 function atualizarPlacar(resultado) {
     const placarJogador = document.querySelectorAll('.pontuacao')[0];
     const placarComputador = document.querySelectorAll('.pontuacao')[1];
@@ -39,7 +64,10 @@ function atualizarPlacar(resultado) {
         pontuacaoComputador++;
         placarComputador.textContent = `Computador: ${pontuacaoComputador}`;
     }
+    verificarFimDeJogo();
 }
+
+
 
 function compararResultados() {
     revelarCartas();
@@ -118,9 +146,13 @@ function destacarBotaoSelecionado(button) {
 }
 
 function realizarJogadaUsuario(botao) {
+  
+    clickSound.currentTime = 0;
+    clickSound.play();
+    
+   
     escolhaJogador = botao;
     gerenciarBotoes(escolhaJogador);
-    
     desabilitarBotoesAdversario();
     escolhaPc = realizarJogadaPc();
     compararResultados();
@@ -129,8 +161,11 @@ function realizarJogadaUsuario(botao) {
     console.log('Computador:', escolhaPc);
 
     setTimeout(() => {
-        esconderCartas();
-        reiniciarJogo();
+
+        if (!verificarFimDeJogo()) {
+            esconderCartas();
+            reiniciarJogo();
+        }
     }, 2000);
 }
 
