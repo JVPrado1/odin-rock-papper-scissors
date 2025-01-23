@@ -48,7 +48,7 @@ function compararResultados() {
             alert(`Você perdeu!`);
             return `Derrota`;
         }
-    }, 100);
+    }, 300);
 }
 
 
@@ -61,6 +61,7 @@ function realizarJogadaUsuario(botao) {
     escolhaPc = realizarJogadaPc();
     
     // Compara os resultados
+    
     compararResultados();
     
     console.log(`Jogador:`, escolhaJogador);

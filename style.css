@@ -57,7 +57,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     transform-style: preserve-3d;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+    transition: all 2.0s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .card__image {
@@ -90,4 +90,12 @@ body {
     color: white;
     transform: translateZ(100px) translateY(-10px) scale(1.2);
     filter: drop-shadow(0 20px 20px rgba(0,0,0,0.4));
+}
+
+.card__image--back {
+    transform: rotateY(180deg);
+}
+
+.card.reveal {
+    transform: rotateY(0deg);
 }
