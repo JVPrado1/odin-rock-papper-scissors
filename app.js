@@ -39,7 +39,7 @@ function esconderCartas() {
 
 function verificarFimDeJogo() {
     if (pontuacaoJogador >= pontuacaoMaxima || pontuacaoComputador >= pontuacaoMaxima) {
-        const texto = document.querySelector('.teste2');
+        const texto = document.querySelector('.titulo__resultados');
         if (pontuacaoJogador >= pontuacaoMaxima) {
             texto.innerHTML = 'Fim de jogo! Você venceu a partida!';
             texto.style.color = 'green';
@@ -74,7 +74,7 @@ function compararResultados() {
     
     setTimeout(() => {
         let resultado;
-        const texto = document.querySelector('.teste2');
+        const texto = document.querySelector('.titulo__resultados');
 
         if (escolhaJogador === escolhaPc) {
             texto.innerHTML = 'Empate!';
@@ -164,15 +164,15 @@ function realizarJogadaUsuario(botao) {
 
         if (!verificarFimDeJogo()) {
             esconderCartas();
-            reiniciarJogo();
+            novaRodada();
         }
     }, 2000);
 }
 
-function reiniciarJogo() {
+function novaRodada() {
     const buttons = document.querySelectorAll('.card-jogador');
     const botoesAdversario = document.querySelectorAll('.card:not(.card-jogador)');
-    const texto = document.querySelector('.teste2');
+    const texto = document.querySelector('.titulo__resultados');
 
     buttons.forEach(button => {
         button.disabled = false;
@@ -188,9 +188,46 @@ function reiniciarJogo() {
         botao.classList.add('card__image--back');
     });
 
-    texto.innerHTML = 'Desenvolvido por João Victor Prado';
+    texto.innerHTML = 'Escolha uma carta!';
     texto.style = '';
 
     escolhaJogador = '';
     escolhaPc = realizarJogadaPc();
 }
+
+
+function reiniciarJogo() {
+  const placarJogador = document.querySelectorAll('.pontuacao')[0];
+  const placarComputador = document.querySelectorAll('.pontuacao')[1];
+  const botaoReiniciar = document.querySelector('.botao__reiniciar');
+  const texto = document.querySelector('.titulo__resultados');
+   
+  botaoReiniciar.addEventListener('click', () => {
+       pontuacaoJogador = 0;
+       pontuacaoComputador = 0;
+       placarComputador.innerHTML = `Computador: ${pontuacaoComputador}`;
+       placarJogador.innerHTML = `Jogador: ${pontuacaoJogador}`;
+       texto.innerHTML = 'Escolha uma carta!';
+       texto.style = '';
+        
+       const buttons = document.querySelectorAll('.card-jogador');
+       const botoesAdversario = document.querySelectorAll('.card:not(.card-jogador)');
+        
+       buttons.forEach(button => {
+           button.disabled = false;
+           button.style = '';
+           const imagem = button.querySelector('.card__image');
+           const titulo = button.querySelector('.card__titulo');
+           titulo.style = '';
+           imagem.style = '';
+       });
+
+       botoesAdversario.forEach(botao => {
+           botao.style = '';
+           botao.classList.add('card__image--back');
+       });
+
+       escolhaJogador = '';
+       escolhaPc = realizarJogadaPc();
+   });
+}reiniciarJogo();
