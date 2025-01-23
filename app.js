@@ -207,8 +207,9 @@ function reiniciarJogo() {
        pontuacaoComputador = 0;
        placarComputador.innerHTML = `Computador: ${pontuacaoComputador}`;
        placarJogador.innerHTML = `Jogador: ${pontuacaoJogador}`;
-       texto.innerHTML = 'Escolha uma carta!';
+       texto.innerHTML = 'Desenvolvido por João Victor Prado';
        texto.style = '';
+       
         
        const buttons = document.querySelectorAll('.card-jogador');
        const botoesAdversario = document.querySelectorAll('.card:not(.card-jogador)');

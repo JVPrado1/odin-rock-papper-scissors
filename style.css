@@ -117,14 +117,29 @@ body {
     margin-top: 10px;
 }
 
-.botao__reiniciar{
+.botao__reiniciar {
     background-color: #1a4c8e;
-    height: 30px;
-    width: 100px;
     color: white;
-    border-radius: 10px;
-    margin-bottom: 0;
-   
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: "Press Start 2P";
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 40px;
+}
+
+.botao__reiniciar:hover {
+    background-color: #4287f5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.botao__reiniciar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 1600px) {
