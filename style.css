@@ -112,3 +112,36 @@ body {
     color: black;
     margin-top: 10px;
 }
+
+@media (max-width: 1600px) {
+    .container{
+     
+        width: clamp(500px, 80%, 900px);
+    }
+
+}
+
+@media (max-width: 650px) {
+    .container {
+        justify-content: center;
+        width: 100%;
+        height: 100dvh;
+    }
+
+    .container__titulo h1 {
+        font-size: 1rem;
+    }
+
+    .container__cards {
+        gap: 10px;
+    }
+
+    .card {
+        height: 150px;
+        width: 100px;
+    }
+
+    .card__image {
+        height: 50px;
+    }
+}
