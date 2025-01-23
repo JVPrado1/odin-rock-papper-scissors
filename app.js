@@ -1,29 +1,29 @@
 let escolhaPc = realizarJogadaPc();
 console.log(escolhaPc);
-let escolhaJogador = ``;
+let escolhaJogador = '';
 let pontuacaoJogador = 0;
 let pontuacaoComputador = 0;
 
 function realizarJogadaPc() {
-    const choices = [`pedra`, `papel`, `tesoura`];
+    const choices = ['pedra', 'papel', 'tesoura'];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];   
 }
 
 function revelarCartas() {
-    const cartasViradas = document.querySelectorAll(`.card__titulo`);
+    const cartasViradas = document.querySelectorAll('.card__titulo');
     cartasViradas.forEach(carta => {
-        if (carta.textContent.toLowerCase() == escolhaPc) {
-            carta.parentElement.classList.remove(`card__image--back`);
+        if (carta.textContent.toLowerCase() === escolhaPc) {
+            carta.parentElement.classList.remove('card__image--back');
         }
     });
 }
 
 function esconderCartas() {
-    const todasCartas = document.querySelectorAll(`.card`);
+    const todasCartas = document.querySelectorAll('.card');
     todasCartas.forEach(carta => {
-        if (!carta.classList.contains(`card-jogador`)) {
-            carta.classList.add(`card__image--back`);
+        if (!carta.classList.contains('card-jogador')) {
+            carta.classList.add('card__image--back');
         }
     });
 }
@@ -46,22 +46,21 @@ function compararResultados() {
     
     setTimeout(() => {
         let resultado;
-        if (escolhaJogador == escolhaPc) {
-            let texto = document.querySelector('.teste2');
+        const texto = document.querySelector('.teste2');
+
+        if (escolhaJogador === escolhaPc) {
             texto.innerHTML = 'Empate!';
-            texto.style.color = 'red';
+            texto.style.color = '#FF7F00';
             resultado = 'Empate';
         } else if (
-            (escolhaJogador == 'pedra' && escolhaPc == 'tesoura') ||
-            (escolhaJogador == 'papel' && escolhaPc == 'pedra') ||
-            (escolhaJogador == 'tesoura' && escolhaPc == 'papel')
+            (escolhaJogador === 'pedra' && escolhaPc === 'tesoura') ||
+            (escolhaJogador === 'papel' && escolhaPc === 'pedra') ||
+            (escolhaJogador === 'tesoura' && escolhaPc === 'papel')
         ) {
-            let texto = document.querySelector('.teste2');
             texto.innerHTML = 'Você venceu!';
-            texto.style.color = 'red';
+            texto.style.color = 'green';
             resultado = 'Vitória';
         } else {
-            let texto = document.querySelector('.teste2');
             texto.innerHTML = 'Você perdeu!';
             texto.style.color = 'red';
             resultado = 'Derrota';
@@ -105,6 +104,7 @@ function desabilitarBotao(button, imagem) {
 function destacarBotaoSelecionado(button) {
     const titulo = button.querySelector('.card__titulo');
     const imagem = button.querySelector('.card__image');
+    
     button.disabled = true;
     button.style.backgroundColor = '#3268b9';
     button.style.transform = 'rotateX(2deg) translateY(-10px)';
@@ -119,14 +119,14 @@ function destacarBotaoSelecionado(button) {
 
 function realizarJogadaUsuario(botao) {
     escolhaJogador = botao;
-    const buttons = gerenciarBotoes(escolhaJogador);
+    gerenciarBotoes(escolhaJogador);
     
     desabilitarBotoesAdversario();
     escolhaPc = realizarJogadaPc();
     compararResultados();
 
-    console.log(`Jogador:`, escolhaJogador);
-    console.log(`Computador:`, escolhaPc);
+    console.log('Jogador:', escolhaJogador);
+    console.log('Computador:', escolhaPc);
 
     setTimeout(() => {
         esconderCartas();
