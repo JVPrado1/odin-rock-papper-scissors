@@ -18,11 +18,12 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    padding: 70px;
+    padding: 30px;
     gap: 40px;
     background: rgba(255, 255, 255, 0.90);
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 40vw;
 }
 
 .container__titulo {
@@ -33,6 +34,10 @@ body {
     margin-bottom: 30px;
     font-family: "Press Start 2P";
     color: black;
+}
+
+.container__titulo h1{
+    font-size: 16px;
 }
 
 .container__cards {
@@ -100,4 +105,11 @@ body {
 
 .card.reveal {
     transform: rotateY(0deg);
+}
+
+.pontuacao {
+    font-family: "Press Start 2P";
+    font-size: 1rem;
+    color: black;
+    margin-top: 10px;
 }

@@ -1,15 +1,15 @@
 let escolhaPc = realizarJogadaPc();
 console.log(escolhaPc);
 let escolhaJogador = ``;
+let pontuacaoJogador = 0;
+let pontuacaoComputador = 0;
 
-// Função para o computador fazer a jogada
 function realizarJogadaPc() {
     const choices = [`pedra`, `papel`, `tesoura`];
     const randomIndex = Math.floor(Math.random() * choices.length);
     return choices[randomIndex];   
 }
 
-// Função que revela a jogada do PC
 function revelarCartas() {
     const cartasViradas = document.querySelectorAll(`.card__titulo`);
     cartasViradas.forEach(carta => {
@@ -19,7 +19,6 @@ function revelarCartas() {
     });
 }
 
-// Função para esconder as cartas
 function esconderCartas() {
     const todasCartas = document.querySelectorAll(`.card`);
     todasCartas.forEach(carta => {
@@ -29,31 +28,47 @@ function esconderCartas() {
     });
 }
 
-// Função para comparar os resultados
+function atualizarPlacar(resultado) {
+    const placarJogador = document.querySelectorAll('.pontuacao')[0];
+    const placarComputador = document.querySelectorAll('.pontuacao')[1];
+
+    if (resultado === 'Vitória') {
+        pontuacaoJogador++;
+        placarJogador.textContent = `Jogador: ${pontuacaoJogador}`;
+    } else if (resultado === 'Derrota') {
+        pontuacaoComputador++;
+        placarComputador.textContent = `Computador: ${pontuacaoComputador}`;
+    }
+}
+
 function compararResultados() {
     revelarCartas();
-   
+    
     setTimeout(() => {
+        let resultado;
         if (escolhaJogador == escolhaPc) {
-            let texto = document.querySelector(`.teste2`);
-            texto.innerHTML = `Empate!`;
+            let texto = document.querySelector('.teste2');
+            texto.innerHTML = 'Empate!';
             texto.style.color = 'red';
-            return `Empate`;
+            resultado = 'Empate';
         } else if (
-            (escolhaJogador == `pedra` && escolhaPc == `tesoura`) ||
-            (escolhaJogador == `papel` && escolhaPc == `pedra`) ||
-            (escolhaJogador == `tesoura` && escolhaPc == `papel`)
+            (escolhaJogador == 'pedra' && escolhaPc == 'tesoura') ||
+            (escolhaJogador == 'papel' && escolhaPc == 'pedra') ||
+            (escolhaJogador == 'tesoura' && escolhaPc == 'papel')
         ) {
-            let texto = document.querySelector(`.teste2`);
-            texto.innerHTML = `Você venceu!`;
+            let texto = document.querySelector('.teste2');
+            texto.innerHTML = 'Você venceu!';
             texto.style.color = 'red';
-            return `Vitória`;
+            resultado = 'Vitória';
         } else {
-            let texto = document.querySelector(`.teste2`);
-            texto.innerHTML = `Você perdeu!`;
+            let texto = document.querySelector('.teste2');
+            texto.innerHTML = 'Você perdeu!';
             texto.style.color = 'red';
-            return `Derrota`;
+            resultado = 'Derrota';
         }
+        
+        atualizarPlacar(resultado);
+        return resultado;
     }, 50);
 }
 
@@ -124,30 +139,23 @@ function reiniciarJogo() {
     const botoesAdversario = document.querySelectorAll('.card:not(.card-jogador)');
     const texto = document.querySelector('.teste2');
 
-   
-  // Reseta os botões do jogador
-  buttons.forEach(button => {
-    button.disabled = false;
-    button.style = '';
-    const imagem = button.querySelector('.card__image');
-    const titulo = button.querySelector('.card__titulo');
-    titulo.style = '';  // Reseta todos os estilos do título
-    imagem.style = '';
-});
+    buttons.forEach(button => {
+        button.disabled = false;
+        button.style = '';
+        const imagem = button.querySelector('.card__image');
+        const titulo = button.querySelector('.card__titulo');
+        titulo.style = '';
+        imagem.style = '';
+    });
 
-
-    // Reseta os botões do adversário
     botoesAdversario.forEach(botao => {
         botao.style = '';
         botao.classList.add('card__image--back');
     });
 
-    // Reseta o texto
     texto.innerHTML = 'Desenvolvido por João Victor Prado';
     texto.style = '';
 
-    // Reseta as variáveis
     escolhaJogador = '';
     escolhaPc = realizarJogadaPc();
 }
-
