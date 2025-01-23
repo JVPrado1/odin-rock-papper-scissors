@@ -14,8 +14,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(45deg, #1a4c8e, #3268b9, #4287f5);
+    background: url(./assets/fundo.jpg);
     box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
