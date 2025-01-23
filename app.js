@@ -207,7 +207,7 @@ function reiniciarJogo() {
        pontuacaoComputador = 0;
        placarComputador.innerHTML = `Computador: ${pontuacaoComputador}`;
        placarJogador.innerHTML = `Jogador: ${pontuacaoJogador}`;
-       texto.innerHTML = 'Desenvolvido por João Victor';
+       texto.innerHTML = 'Desenvolvido por João Victor Prado';
        texto.style = '';
        
         
