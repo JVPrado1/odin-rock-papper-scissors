@@ -32,42 +32,122 @@ function esconderCartas() {
 // Função para comparar os resultados
 function compararResultados() {
     revelarCartas();
-    
+   
     setTimeout(() => {
         if (escolhaJogador == escolhaPc) {
-            alert(`Empate!`);
+            let texto = document.querySelector(`.teste2`);
+            texto.innerHTML = `Empate!`;
+            texto.style.color = 'red';
             return `Empate`;
         } else if (
             (escolhaJogador == `pedra` && escolhaPc == `tesoura`) ||
             (escolhaJogador == `papel` && escolhaPc == `pedra`) ||
             (escolhaJogador == `tesoura` && escolhaPc == `papel`)
         ) {
-            alert(`Você venceu!`);
+            let texto = document.querySelector(`.teste2`);
+            texto.innerHTML = `Você venceu!`;
+            texto.style.color = 'red';
             return `Vitória`;
         } else {
-            alert(`Você perdeu!`);
+            let texto = document.querySelector(`.teste2`);
+            texto.innerHTML = `Você perdeu!`;
+            texto.style.color = 'red';
             return `Derrota`;
         }
-    }, 300);
+    }, 50);
 }
 
+function gerenciarBotoes(escolhaJogador) {
+    const buttons = document.querySelectorAll('.container__cards .card-jogador');
+    buttons.forEach(button => {
+        const buttonText = button.querySelector('.card__titulo').textContent.toLowerCase();
+        const imagem = button.querySelector('.card__image');
+        
+        buttonText !== escolhaJogador ? 
+            desabilitarBotao(button, imagem) : 
+            destacarBotaoSelecionado(button);
+    });
+    return buttons;
+}
 
-// Função que realiza a jogada do Jogador
+function desabilitarBotoesAdversario() {
+    const botoesAdversario = document.querySelectorAll('.card:not(.card-jogador)');
+    botoesAdversario.forEach(botao => {
+        botao.style.pointerEvents = 'none';
+        botao.style.cursor = 'default';
+    });
+}
+
+function desabilitarBotao(button, imagem) {
+    button.style.transition = 'all 0.3s ease';
+    button.disabled = true;
+    button.style.pointerEvents = 'none';
+    button.style.cursor = 'default';
+    button.style.backgroundColor = 'grey';
+    imagem.style.filter = 'grayscale(1) brightness(0.8)';
+}
+
+function destacarBotaoSelecionado(button) {
+    const titulo = button.querySelector('.card__titulo');
+    const imagem = button.querySelector('.card__image');
+    button.disabled = true;
+    button.style.backgroundColor = '#3268b9';
+    button.style.transform = 'rotateX(2deg) translateY(-10px)';
+    button.style.boxShadow = '0 30px 30px rgba(0,0,0,0.3)';
+    
+    titulo.style.color = 'white';
+    titulo.style.transform = 'translateZ(100px) translateY(-10px) scale(1.2)';
+    
+    imagem.style.transform = 'translateZ(100px) translateY(-10px) scale(1.2)';
+    imagem.style.filter = 'drop-shadow(0 20px 20px rgba(0,0,0,0.4))';
+}
+
 function realizarJogadaUsuario(botao) {
-    // Define a escolha do jogador
     escolhaJogador = botao;
+    const buttons = gerenciarBotoes(escolhaJogador);
     
-    // Gera nova jogada do computador
+    desabilitarBotoesAdversario();
     escolhaPc = realizarJogadaPc();
-    
-    // Compara os resultados
-    
     compararResultados();
-    
+
     console.log(`Jogador:`, escolhaJogador);
     console.log(`Computador:`, escolhaPc);
-    
+
     setTimeout(() => {
         esconderCartas();
-    }, 1000);
+        reiniciarJogo();
+    }, 2000);
 }
+
+function reiniciarJogo() {
+    const buttons = document.querySelectorAll('.card-jogador');
+    const botoesAdversario = document.querySelectorAll('.card:not(.card-jogador)');
+    const texto = document.querySelector('.teste2');
+
+   
+  // Reseta os botões do jogador
+  buttons.forEach(button => {
+    button.disabled = false;
+    button.style = '';
+    const imagem = button.querySelector('.card__image');
+    const titulo = button.querySelector('.card__titulo');
+    titulo.style = '';  // Reseta todos os estilos do título
+    imagem.style = '';
+});
+
+
+    // Reseta os botões do adversário
+    botoesAdversario.forEach(botao => {
+        botao.style = '';
+        botao.classList.add('card__image--back');
+    });
+
+    // Reseta o texto
+    texto.innerHTML = 'Desenvolvido por João Victor Prado';
+    texto.style = '';
+
+    // Reseta as variáveis
+    escolhaJogador = '';
+    escolhaPc = realizarJogadaPc();
+}
+

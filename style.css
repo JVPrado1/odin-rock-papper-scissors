@@ -40,7 +40,9 @@ body {
     gap: clamp(0px, 5vw, 50px);
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
+
 
 .card {
     display: flex;
